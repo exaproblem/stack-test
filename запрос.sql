@@ -18,7 +18,7 @@ GO
 CREATE FUNCTION select_orders_by_item_name(@ItemName nvarchar(max))
 RETURNS Table AS RETURN   
 (  
-  SELECT	Orders.row_id as order_id, Customers.name as customer, COUNT(Orders.row_id) as items_count
+  SELECT	Orders.row_id AS order_id, Customers.name AS customer, COUNT(Orders.row_id) AS items_count
 	FROM	Orders, OrderItems, Customers 
 	WHERE	Orders.customer_id = Customers.row_id AND 
 			OrderItems.order_id = Orders.row_id AND 
@@ -68,7 +68,7 @@ RETURNS INT AS BEGIN
 		WHERE	o.parent_id = @RowId
 	ELSE
         SELECT	@total_sum = sum(i.price)
-        FROM	Orders AS o inner join OrderItems AS i ON o.row_id = i.order_id
+        FROM	Orders AS o JOIN OrderItems AS i ON o.row_id = i.order_id
         WHERE	o.row_id = @RowId
     RETURN	@total_sum
 END;
